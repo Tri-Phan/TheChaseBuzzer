@@ -1,1 +1,60 @@
-<h1>hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>The cooler buzzer website</title>
+		<link rel="stylesheet" href="styleMain.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				const okSsuka = new Audio('OkSsuka.wav');
+				const egg = new Audio('Egg.wav');
+				$("#userName").change(function() {
+					okSsuka.play();
+					$("#playerLink").attr("href", "/play?user="+this.value+"&team=Players");
+					$("#playerLink").html("Players");
+					
+					$("#chaserLink").attr("href", "/play?user="+this.value+"&team=Chasers");
+					$("#chaserLink").html("Chasers");
+				});
+				$("#egg").click(function() {
+					if ($(this).attr("src") == "Egg1.png") {
+						$(this).attr("src", "Egg2.gif");
+						$(this).css("width", "40");
+						
+						egg.play();
+						egg.loop = true;
+					}
+					else {
+						$(this).attr("src", "Egg1.png");
+						$(this).css("width", "14");
+						egg.pause()
+					}
+				});				
+			});
+		</script>
+	</head>
+	<body>
+		<img id="egg" src="Egg1.png">
+		<div id="interface">
+			<img src="MainLogo.png">
+			<br>
+			Your name, please:
+			<br>
+			<input type="text" id="userName" placeholder="User name" style="margin-top: 10px; width: 240px;">
+			<br>
+			<br>
+			Then pick a team:
+			<br>
+			<br>
+			<a id="playerLink"></a>
+			<br>
+			<br>
+			<a id="chaserLink"></a>
+			<br>
+			<br>
+			<br>
+			<br>
+			Or <a href="/host">host</a>
+		</div>
+	</body>
+</html>
